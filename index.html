@@ -553,7 +553,7 @@
         var reduceMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)"
         ).matches;
-        if (!mount || typeof THREE === "undefined" || reduceMotion) return;
+        if (!mount || typeof THREE === "undefined") return;
 
         var scene = new THREE.Scene();
         var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -605,9 +605,15 @@
             window.innerWidth,
             window.innerHeight
           );
+          if (reduceMotion) renderer.render(scene, camera);
         });
 
-        animate();
+        if (reduceMotion) {
+          material.uniforms.iTime.value = 12.0;
+          renderer.render(scene, camera);
+        } else {
+          animate();
+        }
       })();
     </script>
   </body>
