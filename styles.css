@@ -792,3 +792,100 @@ h3 {
     transform: none;
   }
 }
+
+/* ============================================================
+   Aurora design layer (ported from starfall-portfolio-landing)
+   Adds an animated WebGL background, glassmorphism surfaces,
+   gradient headings, and a floating hero — content unchanged.
+   ============================================================ */
+
+#aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#aurora-bg canvas {
+  display: block;
+}
+
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 12, 16, 0.42) 0%,
+    rgba(10, 12, 16, 0.78) 55%,
+    rgba(10, 12, 16, 0.92) 100%
+  );
+}
+
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.hero-text {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Gradient accent on the serif headings, matching the component */
+h1 em {
+  background: linear-gradient(120deg, #5eead4 0%, #818cf8 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Glassmorphism for all card surfaces */
+.hero-panel,
+.timeline-card,
+.project-card,
+.skill-card,
+.edu-card,
+.cert-card,
+.contact-intro,
+.contact-form {
+  background: rgba(22, 26, 36, 0.55);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Keep the projects band translucent so the aurora glows through */
+.projects {
+  background: rgba(17, 20, 27, 0.4);
+}
+
+.stack-list li {
+  background: rgba(17, 20, 27, 0.55);
+}
+
+/* Frosted-glass treatment for the ghost / outline buttons */
+.btn.ghost {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-text {
+    animation: none;
+  }
+}
